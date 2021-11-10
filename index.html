@@ -59,10 +59,10 @@
 
         function removeCompleted() {
             let list = document.querySelector("ul");
-            while (list.firstChild) {
-                if (list.firstChild.contains("finished")) {
-                    list.removeChild(list.firstChild);
-                }
+            let l_elements = list.parentNode.getElementsByTagName("li");
+            for (let i = 0; i < l_elements.length; i++) {
+                if (l_elements[i].classList.contains("finished")) 
+                    l_elements[i].parentNode.removeChild(l_elements[i]);
             }
         }
 
