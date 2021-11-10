@@ -13,7 +13,7 @@ h1 {
     padding-left: 35%;
 }
 
-h2 {
+h2{
     font-family: 'Segoe UI';
     font-size: 25px;
     margin: auto;
@@ -39,6 +39,11 @@ button {
     padding: 2px 7px;
 }
 
+ul {
+    font-size: 22px;
+    font-family: 'Segoe UI';
+    padding: 15px;
+}
 li {
     font-size: 18px;
     font-family: 'Segoe UI';

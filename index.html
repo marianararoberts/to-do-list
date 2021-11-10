@@ -28,11 +28,11 @@
 
     <script>
         function addTask() {
+            let list = document.querySelector("ul");
             let taskBox = document.querySelector("#textbox");
             if (taskBox.value !== "") {
                 let taskElm = document.createElement("li");
                 taskElm.textContent = taskBox.value;
-                let list = document.querySelector("ul");
                 list.appendChild(taskElm);
                 taskElm.addEventListener("click", crossOut);
                 alert(taskBox.value + " has been added to list.");
@@ -46,23 +46,25 @@
         let button = document.querySelector("button");
         button.addEventListener("click", addTask);
         let allButton = document.querySelector("#allBtn");
-        button.addEventListener("click", remove());
+        allButton.addEventListener("click", removeAll);
         let completedButton = document.querySelector("#completedBtn");
-        button.addEventListener("click", removeCompleted());
+        completedButton.addEventListener("click", removeCompleted);
 
-        function remove() {
-            // pop up that is like "Are you sure you'd like to remove all tasks?"
-            // reload page?
+        function removeAll() {
+            let list = document.querySelector("ul");
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
         }
 
         function removeCompleted() {
-            // figure out which chidlren .classList.contains("finished") and remove them
-            // for (int i = 0; i < list.children(); i++) {
-            //     if (listElm.classList.contains("finished")) {
-            //         list.removeChild(taskElm);
-            //     }
-            // }
-            // pop up that is like "Are you sure you'd like to remove all completed tasks?"
+            let list = document.querySelector("ul");
+            while (list.firstChild) {
+                if (list.firstChild.classList.contains("finished")) {
+                    list.removeChild(list.firstChild);
+                }
+            }
+            // listElm.parentNode.removeChild(listElm);
         }
 
         function crossOut(event) {
