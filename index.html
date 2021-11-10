@@ -60,11 +60,10 @@
         function removeCompleted() {
             let list = document.querySelector("ul");
             while (list.firstChild) {
-                if (list.firstChild.classList.contains("finished")) {
+                if (list.firstChild.contains("finished")) {
                     list.removeChild(list.firstChild);
                 }
             }
-            // listElm.parentNode.removeChild(listElm);
         }
 
         function crossOut(event) {
