@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <title>To-Do List</title>
+
+</head>
+
+<body>
+    <div id="header">
+        <h1>To-Do List</h1>
+        <img src="images/check.png" width=100>
+    </div>
+    <h2>Create a to-do list to keep track of your tasks and get them done!</h2>
+    <div style="text-align: center; padding-right: 5%; padding-top: 1%;">
+        <label>Enter task here: </label><input type="input" id="textbox">
+        <button>CONFIRM</button>
+        <br>
+        <br>
+        <button id="completedBtn">Remove all <b>completed</b> tasks</button>
+        <button id="allBtn">Remove all tasks</button>
+    </div>
+    <ul></ul>
+
+    <script>
+        function addTask() {
+            let taskBox = document.querySelector("#textbox");
+            if (taskBox.value !== "") {
+                let taskElm = document.createElement("li");
+                taskElm.textContent = taskBox.value;
+                let list = document.querySelector("ul");
+                list.appendChild(taskElm);
+                taskElm.addEventListener("click", crossOut);
+                alert(taskBox.value + " has been added to list.");
+                taskBox.value = '';
+            }
+            else {
+                alert("Please type in a task to be added to the to-do list.");
+            }
+        }
+
+        let button = document.querySelector("button");
+        button.addEventListener("click", addTask);
+        let allButton = document.querySelector("#allBtn");
+        button.addEventListener("click", remove());
+        let completedButton = document.querySelector("#completedBtn");
+        button.addEventListener("click", removeCompleted());
+
+        function remove() {
+            // pop up that is like "Are you sure you'd like to remove all tasks?"
+            // reload page?
+        }
+
+        function removeCompleted() {
+            // figure out which chidlren .classList.contains("finished") and remove them
+            // for (int i = 0; i < list.children(); i++) {
+            //     if (listElm.classList.contains("finished")) {
+            //         list.removeChild(taskElm);
+            //     }
+            // }
+            // pop up that is like "Are you sure you'd like to remove all completed tasks?"
+        }
+
+        function crossOut(event) {
+            let listElm = event.currentTarget;
+            if (listElm.classList.contains("finished")) {
+                listElm.classList.remove("finished");
+            }
+            else {
+                listElm.classList.add("finished");
+            }
+        }
+
+    </script>
+</body>
+
+</html>
