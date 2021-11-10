@@ -18,15 +18,26 @@
     <h2>Create a to-do list to keep track of your tasks and get them done!</h2>
     <div style="text-align: center; padding-right: 5%; padding-top: 1%;">
         <label>Enter task here: </label><input type="input" id="textbox">
+        <br>
+        <br>
+        <label>Time to complete: </label><input type="time" value="" id="date">
+        <br>
+        <br>
         <button>CONFIRM</button>
         <br>
         <br>
-        <button id="completedBtn">Remove all <b>completed</b> tasks</button>
+        <label>Auto remove tasks on-click? </label><input type="checkbox" id="check">
         <button id="allBtn">Remove all tasks</button>
     </div>
     <ul></ul>
 
     <script>
+        let dateInput = document.querySelector("#date");
+        var today = new Date();
+        var t = dateInput.value = today.getHours()+1 + ":00";
+        dateInput.value = t;
+        let autoRemove = document.querySelector("#check")
+
         function addTask() {
             let list = document.querySelector("ul");
             let taskBox = document.querySelector("#textbox");
@@ -35,8 +46,34 @@
                 taskElm.textContent = taskBox.value;
                 list.appendChild(taskElm);
                 taskElm.addEventListener("click", crossOut);
+                var tt = document.createElement("taskTime");
+                var timeToComplete = dateInput.value;
+                if (dateInput.value.charAt(0) == 0 && dateInput.value.charAt(1) == 0) {
+                    timeToComplete = "12:" + dateInput.value.charAt(3) + dateInput.value.charAt(4) + " AM";
+                }
+                else if (dateInput.value.charAt(0) < 1 || dateInput.value.charAt(1) < 3) {
+                    timeToComplete = dateInput.value + " AM";
+                    if (timeToComplete.charAt(0) == 1 && timeToComplete.charAt(1) == 2) 
+                        timeToComplete = dateInput.value + " PM";
+                }
+                else if (dateInput.value.charAt(0) > 0) {
+                    let hours = dateInput.value.charAt(0)+ "" + dateInput.value.charAt(1);
+                    let intHours = parseInt(hours);
+                    intHours -= 12;
+                    if (intHours < 10)
+                        timeToComplete = '0' + intHours + dateInput.value.charAt(2) + dateInput.value.charAt(3) + dateInput.value.charAt(4) + " PM";
+                    else
+                        timeToComplete = intHours + dateInput.value.charAt(2) + dateInput.value.charAt(3) + dateInput.value.charAt(4) + " PM";
+                }
+                
+                var time = document.createTextNode(timeToComplete);
+                var tt = document.createElement("SPAN");
+                tt.className = "time";
+                tt.appendChild(time);
+                taskElm.appendChild(tt);
                 alert(taskBox.value + " has been added to list.");
                 taskBox.value = '';
+                dateInput.value = t;
             }
             else {
                 alert("Please type in a task to be added to the to-do list.");
@@ -47,8 +84,6 @@
         button.addEventListener("click", addTask);
         let allButton = document.querySelector("#allBtn");
         allButton.addEventListener("click", removeAll);
-        let completedButton = document.querySelector("#completedBtn");
-        completedButton.addEventListener("click", removeCompleted);
 
         function removeAll() {
             let list = document.querySelector("ul");
@@ -57,22 +92,18 @@
             }
         }
 
-        function removeCompleted() {
-            let list = document.querySelector("ul");
-            let l_elements = list.parentNode.getElementsByTagName("li");
-            for (let i = 0; i < l_elements.length; i++) {
-                if (l_elements[i].classList.contains("finished")) 
-                    l_elements[i].parentNode.removeChild(l_elements[i]);
-            }
-        }
-
         function crossOut(event) {
+            let list = document.querySelector("ul");
             let listElm = event.currentTarget;
-            if (listElm.classList.contains("finished")) {
-                listElm.classList.remove("finished");
+            if (!listElm.classList.contains("finished")) {
+                listElm.classList.add("finished");
+                if (autoRemove.checked)
+                    list.removeChild(listElm);
             }
             else {
-                listElm.classList.add("finished");
+                listElm.classList.remove("finished");
+                if (autoRemove.checked)
+                    list.removeChild(listElm);
             }
         }
 

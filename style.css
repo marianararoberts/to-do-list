@@ -39,6 +39,23 @@ button {
     padding: 2px 7px;
 }
 
+#datebox {
+    padding: 5px;
+    border: 1px;
+}
+
+.time {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.time:hover {
+    background-color: #f44336;
+    color: white;
+  }
+
 ul {
     font-size: 22px;
     font-family: 'Segoe UI';
