@@ -33,8 +33,8 @@
 
     <script>
         let dateInput = document.querySelector("#date");
-        var today = new Date();
-        var t = dateInput.value = today.getHours()+1 + ":00";
+        let today = new Date();
+        let t = dateInput.value = today.getHours()+1 + ":00";
         dateInput.value = t;
         let autoRemove = document.querySelector("#check")
 
@@ -46,8 +46,8 @@
                 taskElm.textContent = taskBox.value;
                 list.appendChild(taskElm);
                 taskElm.addEventListener("click", crossOut);
-                var tt = document.createElement("taskTime");
-                var timeToComplete = dateInput.value;
+                let tt = document.createElement("taskTime");
+                let timeToComplete = dateInput.value;
                 if (dateInput.value.charAt(0) == 0 && dateInput.value.charAt(1) == 0) {
                     timeToComplete = "12:" + dateInput.value.charAt(3) + dateInput.value.charAt(4) + " AM";
                 }
@@ -66,8 +66,8 @@
                         timeToComplete = intHours + dateInput.value.charAt(2) + dateInput.value.charAt(3) + dateInput.value.charAt(4) + " PM";
                 }
                 
-                var time = document.createTextNode(timeToComplete);
-                var tt = document.createElement("SPAN");
+                let time = document.createTextNode(timeToComplete);
+                let tt = document.createElement("SPAN");
                 tt.className = "time";
                 tt.appendChild(time);
                 taskElm.appendChild(tt);
