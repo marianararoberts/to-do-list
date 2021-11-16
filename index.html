@@ -34,7 +34,10 @@
     <script>
         let dateInput = document.querySelector("#date");
         var today = new Date();
-        var t = dateInput.value = today.getHours()+1 + ":00";
+        var hours = today.getHours() + 1;
+        var t = hours + ":00";
+        if (today.getHours() < 9)
+            t += '0'
         dateInput.value = t;
         let autoRemove = document.querySelector("#check")
 
